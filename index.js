@@ -11,11 +11,35 @@ app.get('/nueva-ruta', (req, res) => {
 }); // creamos nueva ruta
 
 app.get('/products', (req, res) => {
+  res.json([
+    {
+      name: 'Product 1',
+      price: 1000,
+    },
+    {
+      name: 'Product 2',
+      price: 2000,
+    },
+  ]); //trabajamos con json porque somos api
+}); // los get genericos son array
+
+//get de parametro con :
+app.get('/products/:id', (req, res) => {
+  const { id } = req.params; //recojemos el id de params
   res.json({
+    id,
     name: 'Product 1',
     price: 1000,
-  }); //trabajamos con json porque somos api
-}); // creamos nueva ruta
+  });
+});
+//get + de un parametro
+app.get('/categories/:categoryId/products/:productsId', (req, res) => {
+  const { categoryId, productsId } = req.params;
+  res.json({
+    categoryId,
+    productsId,
+  });
+});
 
 app.listen(port, () => {
   console.log('esta corriendo' + port);
