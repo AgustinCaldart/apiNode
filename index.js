@@ -40,6 +40,20 @@ app.get('/categories/:categoryId/products/:productsId', (req, res) => {
     productsId,
   });
 });
+//parametros de tipo query
+app.get('/users', (req, res) => {
+  //al ser opcionales no se ponen en la ruta
+  const { limit, offset } = req.query;
+  if (limit && offset) {
+    //clausula if ya que son opcionales
+    res.json({
+      limit,
+      offset,
+    });
+  } else {
+    res.send('No hay parametros');
+  }
+});
 
 app.listen(port, () => {
   console.log('esta corriendo' + port);
