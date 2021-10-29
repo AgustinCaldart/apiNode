@@ -13,9 +13,8 @@ app.get('/nueva-ruta', (req, res) => {
 //usando faker
 app.get('/products', (req, res) => {
   const products = [];
-  const { size } = req.query;
-  const limit = size || 10; //usamos los query para definir cantidad de productos
-  for (let index = 0; index < limit; index++) {
+  const { limit } = req.query;
+  for (let index = 0; index < (limit || 10); index++) {
     products.push({
       name: faker.commerce.productName(),
       price: parseInt(faker.commerce.price(), 10),
@@ -24,6 +23,10 @@ app.get('/products', (req, res) => {
   }
   res.json(products); //trabajamos con json porque somos api
 }); // los get genericos son array
+
+app.get('/products/filter', (req, res) => {
+  res.send('Soy un filter');
+});
 
 //get de parametro con :
 app.get('/products/:id', (req, res) => {
