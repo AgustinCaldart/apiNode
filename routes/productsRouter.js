@@ -1,18 +1,12 @@
 const express = require('express'); //usamos express
-const faker = require('faker'); //usamos faker
 
+const ProductsServices = require('./../services/productService');
 const router = express.Router();
+const service = new ProductsServices();
 
 router.get('/', (req, res) => {
-  const products = [];
-  const { limit } = req.query;
-  for (let index = 0; index < (limit || 10); index++) {
-    products.push({
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.imageUrl(),
-    });
-  }
+  const products = service.find();
+
   res.json(products); //trabajamos con json porque somos api
 }); // los get genericos son array
 
@@ -23,17 +17,8 @@ router.get('/filter', (req, res) => {
 //get de parametro con :
 router.get('/:id', (req, res) => {
   const { id } = req.params; //recojemos el id de params
-  if (id === '999') {
-    res.status(404).json({
-      message: 'not found',
-    });
-  } else {
-    res.status(200).json({
-      id,
-      name: 'Product 1',
-      price: 1000,
-    });
-  }
+  const product = service.findOne(id);
+  res.json(product);
 });
 
 router.post('/', (req, res) => {
