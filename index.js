@@ -4,6 +4,8 @@ const routerApi = require('./routes'); //usamos express
 const app = express();
 const port = 3000;
 
+app.use(express.json()); //para recibir infomarcion de tipo json
+
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
 }); // rutamos
