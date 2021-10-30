@@ -7,7 +7,7 @@ class ProductsServices {
   }
 
   generete() {
-    const limit = 100;
+    const limit = 5;
     for (let index = 0; index < (limit || 15); index++) {
       this.products.push({
         id: faker.datatype.uuid(),
@@ -17,14 +17,44 @@ class ProductsServices {
       });
     }
   }
-  create() {}
-  find() {
-    return this.products;
+  async create(data) {
+    const newProduct = {
+      id: faker.datatype.uuid(),
+      ...data,
+    };
+    this.products.push(newProduct);
+    return newProduct;
   }
-  findOne(id) {
+  find() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.products);
+      }, 5000);
+    });
+  }
+  async findOne(id) {
+    const name = this.getTotal();
     return this.products.find((item) => item.id === id);
   }
-  update() {}
-  delete() {}
+  async update(id, change) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw new Error('product not found');
+    }
+    const product = this.products[index];
+    this.products[index] = {
+      ...product,
+      ...change,
+    };
+    return this.products[index];
+  }
+  async delete(id) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw new Error('product not found');
+    }
+    this.products.splice(index, 1);
+    return { id };
+  }
 }
 module.exports = ProductsServices;
