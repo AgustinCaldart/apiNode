@@ -1,6 +1,6 @@
 const getConnection = require('../libs/postgres');
 
-class UserService {
+class CategorieSerivce {
   constructor() {}
 
   async create(data) {
@@ -9,7 +9,7 @@ class UserService {
 
   async find() {
     const client = await getConnection();
-    const rta = await client.query('SELECT * FROM tasks');
+    const rta = await client.query('SELECT * FROM categories');
     return rta.rows;
   }
 
@@ -29,4 +29,4 @@ class UserService {
   }
 }
 
-module.exports = UserService;
+module.exports = CategorieSerivce;
