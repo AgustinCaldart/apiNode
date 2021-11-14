@@ -1,7 +1,7 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
 
-const pool = require('../libs/postgresPool');
+//const pool = require('../libs/postgresPool');
 const sequelize = require('../libs/sequelize');
 class ProductsServices {
   constructor() {
