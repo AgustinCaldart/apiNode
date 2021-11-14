@@ -2,12 +2,12 @@ const faker = require('faker');
 const boom = require('@hapi/boom');
 
 const pool = require('../libs/postgresPool');
-
+const sequelize = require('../libs/sequelize');
 class ProductsServices {
   constructor() {
     this.products = [];
-    this.pool = pool;
-    this.pool.on('error', (err) => console.log(err)); // manejo de error
+    /*  this.pool = pool;
+    this.pool.on('error', (err) => console.log(err)); // manejo de error */
   }
 
   generete() {
@@ -38,10 +38,16 @@ class ProductsServices {
     });
   } */
 
-  async find() {
+  /*  async find() {
     const query = 'SELECT * FROM tasks';
     const rta = await this.pool.query(query);
     return rta.rows;
+  }
+ */
+  async find() {
+    const query = 'SELECT * FROM tasks';
+    const [data] = await sequelize.query(query);
+    return data;
   }
 
   async findOne(id) {
