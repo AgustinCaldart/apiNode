@@ -5,6 +5,7 @@ const {
   logErrors,
   errorHandler,
   boomErrorHandler,
+  ormErrorHandler,
 } = require('./middleware/errorHandler');
 
 const app = express();
@@ -27,23 +28,24 @@ const options = {
 app.use(cors(options));
  */
 app.get('/', (req, res) => {
-  res.send('Hola mi server en Express')
-})
+  res.send('Hola mi server en Express');
+});
 
 app.get('/nueva-ruta', (req, res) => {
-  res.send('Hola soy una nueva ruta')
-})
+  res.send('Hola soy una nueva ruta');
+});
 
 app.get('/home', (req, res) => {
-  res.send('Aquí encontrarás nuestra página principal')
-})
+  res.send('Aquí encontrarás nuestra página principal');
+});
 
 routerApi(app);
 
 app.use(logErrors);
+app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
   console.log('My port: ' + port);
-})
+});
