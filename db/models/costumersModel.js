@@ -1,4 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
+const { USER_TABLE } = require('./usersModel');
 
 const COSTUMER_TABLE = 'costumer';
 
@@ -14,10 +15,38 @@ const CostumerSchema = {
     type: DataTypes.STRING,
     unique: true,
   },
+  lastName: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'last_name',
+  },
+  phone: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
+  createdAt: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    field: 'created_at',
+    defaultValue: Sequelize.NOW,
+  },
+  userId: {
+    field: 'user_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      model: USER_TABLE,
+      key: 'id',
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+  },
 };
 
 class Costumer extends Model {
-  static associate() {}
+  static associate(models) {
+    this.belongsTo(models.User, { as: 'user' });
+  }
   static config(sequelize) {
     return {
       sequelize,

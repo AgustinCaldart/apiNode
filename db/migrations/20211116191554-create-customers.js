@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-  CostumerSchema,
-  COSTUMER_TABLE,
-} = require('./../models/costumersModel');
+const { COSTUMER_TABLE, CostumerSchema } = require('../models/costumersModel');
 
 module.exports = {
   up: async (queryInterface) => {
