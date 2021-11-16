@@ -1,6 +1,6 @@
 const express = require('express'); //usamos express
 
-const CategoriesServide = require('./../services/categoriesService');
+const CategoriesService = require('./../services/categoriesService');
 const validatorHandler = require('./../middleware/validatorHandler');
 const {
   updateCategorySchema,
@@ -9,7 +9,7 @@ const {
 } = require('./../schemas/categoriesSchemas');
 
 const router = express.Router();
-const service = new CategoriesServide();
+const service = new CategoriesService();
 
 router.get('/', async (req, res, next) => {
   try {
