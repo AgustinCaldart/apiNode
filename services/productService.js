@@ -23,12 +23,17 @@ class ProductsServices {
       });
     }
   }
-  async create(data) {
+  /*   async create(data) {
     const newProduct = {
       id: faker.datatype.uuid(),
       ...data,
     };
     this.products.push(newProduct);
+    return newProduct;
+  } */
+
+  async create(data) {
+    const newProduct = await models.Product.create(data);
     return newProduct;
   }
   /*  find() {
@@ -52,12 +57,16 @@ class ProductsServices {
   } */
 
   async find() {
-    const rta = await models.Product.findAll();
+    const rta = await models.Product.findAll({
+      include: ['category'],
+    });
     return rta;
   }
 
   async findOne(id) {
-    const product = this.products.find((item) => item.id === id);
+    const product = await models.Product.findByPk(id, {
+      include: ['category'],
+    });
     if (!product) {
       throw boom.notFound('produc not found');
     }
