@@ -33,9 +33,8 @@ const UserSchema = {
 
 class User extends Model {
   //Gracias a la extencion tenemos atributos
-  static associate() {
-    //static no se necesita declarar el objeto para cceder el metod
-    //associate
+  static associate(models) {
+    this.hasOne(models.Costumer, { as: 'costumer', foreignKey: 'userId' });
   }
   static config(sequelize) {
     return {

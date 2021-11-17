@@ -9,6 +9,7 @@ function setupModels(sequelize) {
   Category.init(CategorySchema, Category.config(sequelize));
   Costumer.init(CostumerSchema, Costumer.config(sequelize));
 
+  User.associate(sequelize.models);
   Costumer.associate(sequelize.models);
 }
 
