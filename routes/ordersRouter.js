@@ -3,10 +3,10 @@ const express = require('express'); //usamos express
 const OrderService = require('./../services/ordersService');
 const validatorHandler = require('./../middleware/validatorHandler');
 const {
-  updateOrderSchema,
-  createOrderSchema,
   getOrderSchema,
-} = require('./../schemas/ordersSchemas');
+  createOrderSchema,
+  updateOrderSchema,
+} = require('./../schemas/orderSchemas');
 
 const router = express.Router();
 const service = new OrderService();
