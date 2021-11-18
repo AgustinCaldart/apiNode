@@ -16,8 +16,8 @@ const OrderSchema = {
     field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  customerId: {
-    field: 'customer_id',
+  costumerId: {
+    field: 'costumer_id',
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
@@ -31,9 +31,9 @@ const OrderSchema = {
 
 class Order extends Model {
   static associate(models) {
-    /*  this.belongsTo(models.Customer, {
-      as: 'customer',
-    }); */
+    this.belongsTo(models.Costumer, {
+      as: 'costumer',
+    });
   }
   static config(sequelize) {
     return {

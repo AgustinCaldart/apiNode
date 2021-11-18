@@ -49,7 +49,7 @@ class Costumer extends Model {
     this.belongsTo(models.User, { as: 'user' });
     this.hasMany(models.Order, {
       as: 'orders',
-      foreignKey: 'customerId',
+      foreignKey: 'costumerId',
     });
   }
   static config(sequelize) {
