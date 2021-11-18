@@ -3,6 +3,7 @@ const express = require('express'); //usamos express
 const ProductsServices = require('./../services/productService');
 const validatorHandler = require('./../middleware/validatorHandler');
 const {
+  queryProductSchema,
   createProductSchema,
   updateProductSchema,
   getProductSchema,
@@ -11,11 +12,18 @@ const {
 const router = express.Router();
 const service = new ProductsServices();
 
-router.get('/', async (req, res) => {
-  const products = await service.find();
-
-  res.json(products); //trabajamos con json porque somos api
-}); // los get genericos son array
+router.get(
+  '/',
+  validatorHandler(queryProductSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      const products = await service.find(req.query);
+      res.json(products);
+    } catch (error) {
+      next(error);
+    }
+  }
+); // los get genericos son array
 
 //get de parametro con :
 router.get(
