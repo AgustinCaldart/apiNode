@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const USER_TABLE = 'users'; //Es buena practica definer nombre de tabla
@@ -42,6 +43,12 @@ class User extends Model {
       tableName: USER_TABLE,
       modelName: 'User',
       timestamps: false,
+      hooks: {
+        beforeCreate: async (user, options) => {
+          const password = await bcrypt.hash(user.password, 10);
+          user.password = password;
+        },
+      },
     };
   }
 }

@@ -7,6 +7,8 @@ class CostumerService {
     const newCostumer = await models.Costumer.create(data, {
       include: ['user'],
     });
+    /* console.log(newCostumer.dataValues); */
+    delete newCostumer.dataValues.user.dataValues.password;
     return newCostumer;
   }
 
@@ -14,6 +16,7 @@ class CostumerService {
     const rta = await models.Costumer.findAll({
       include: ['user'],
     });
+    /* console.log(rta.map((item) => item.dataValues.user.dataValues.password)); */
     return rta;
   }
 
