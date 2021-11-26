@@ -12,6 +12,7 @@ const config = {
   pgEmail: process.env.PG_MAIL,
   pgPassword: process.env.PG_PASSWORD,
   dbUrl: process.env.DATABASE_URL,
+  apiKey: process.env.API_KEY,
 };
 
 module.exports = { config };

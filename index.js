@@ -7,6 +7,7 @@ const {
   boomErrorHandler,
   ormErrorHandler,
 } = require('./middleware/errorHandler');
+const { checkApiKey } = require('./middleware/authHandler');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
   res.send('Hola mi server en Express');
 });
 
-app.get('/nueva-ruta', (req, res) => {
+app.get('/nueva-ruta', checkApiKey, (req, res) => {
   res.send('Hola soy una nueva ruta');
 });
 
