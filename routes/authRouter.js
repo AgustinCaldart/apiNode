@@ -5,6 +5,10 @@ const { config } = require('./../config/config');
 
 const router = express.Router();
 
+const jwtConfig = {
+  expiresIn: '7d',
+};
+
 router.post(
   '/login',
   passport.authenticate('local', { session: false }),
@@ -16,7 +20,7 @@ router.post(
         sub: user.id,
         role: user.role,
       };
-      const token = jwt.sign(payload, config.jwtSecret);
+      const token = jwt.sign(payload, config.jwtSecret, jwtConfig);
       res.json({
         user,
         token,
