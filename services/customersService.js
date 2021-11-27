@@ -16,7 +16,7 @@ class CostumerService {
     const rta = await models.Costumer.findAll({
       include: ['user'],
     });
-    /* console.log(rta.map((item) => item.dataValues.user.dataValues.password)); */
+
     return rta;
   }
 
